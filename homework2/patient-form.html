@@ -1,1 +1,207 @@
+<!DOCTYPE html>
+<html lang="en">
 
+<!--
+Program name: patient-form.html
+Author: Rayyan Zakibaig
+Date created: 02/27/2026
+Date last edited: 03/27/2026
+Version: 2.0
+Description: Enhanced Patient Registration Form with validation, review functionality,
+and JavaScript interactivity for PrimeCare Medical Center.
+-->
+
+<head>
+    <meta charset="UTF-8">
+    <title>PrimeCare Medical Center - Patient Registration</title>
+
+    <!-- External CSS -->
+    <link rel="stylesheet" href="style.css">
+
+    <!-- External JavaScript -->
+    <script src="script.js"></script>
+
+    <!-- Dynamic Date -->
+    <script>
+        function displayDate() {
+            const today = new Date();
+            const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
+            document.getElementById("currentDate").innerHTML =
+                today.toLocaleDateString('en-US', options);
+        }
+    </script>
+</head>
+
+<body onload="displayDate()">
+
+<!-- HEADER -->
+<div id="header">
+    <img src="primecare.png" alt="PrimeCare Logo" width="90">
+    <h1>PrimeCare Medical Center</h1>
+    <p>Today is: <span id="currentDate"></span></p>
+</div>
+
+<hr>
+
+<!-- MAIN -->
+<div id="main">
+
+<h2>Patient Registration Form</h2>
+
+<form id="patientForm" action="thankyou.html" method="post">
+
+<table>
+
+<tr>
+    <td>First Name:</td>
+    <td>
+        <input type="text" name="firstname" required
+        pattern="[A-Za-z'-]{1,30}"
+        title="1-30 letters, apostrophes or dashes only">
+    </td>
+
+    <td>Middle Initial:</td>
+    <td>
+        <input type="text" name="mi"
+        pattern="[A-Za-z]{1}"
+        title="Single letter only">
+    </td>
+
+    <td>Last Name:</td>
+    <td>
+        <input type="text" name="lastname" required
+        pattern="[A-Za-z0-9'-]{1,30}"
+        title="1-30 characters (letters, numbers, apostrophes, dashes)">
+    </td>
+</tr>
+
+<tr>
+    <td>Date of Birth:</td>
+    <td>
+        <input type="date" name="dob" required
+        title="Select a valid birth date">
+    </td>
+
+    <td>ID Number:</td>
+    <td>
+        <input type="password" name="id"
+        pattern="[0-9]{3}-[0-9]{2}-[0-9]{4}"
+        title="Format: XXX-XX-XXXX">
+    </td>
+</tr>
+
+<tr>
+    <td>Phone Number:</td>
+    <td>
+        <input type="tel" name="phone"
+        pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}"
+        title="Format: 123-456-7890">
+    </td>
+</tr>
+
+<tr>
+    <td>Email:</td>
+    <td>
+        <input type="email" name="email" required
+        title="Enter valid email (example@domain.com)">
+    </td>
+
+    <td>User ID:</td>
+    <td>
+        <input type="text" id="userid" name="userid" required
+        pattern="[a-zA-Z][a-zA-Z0-9_-]{4,29}"
+        title="5-30 chars, must start with a letter, no spaces"
+        onblur="formatUserID()">
+    </td>
+</tr>
+
+<tr>
+    <td>Password:</td>
+    <td>
+        <input type="password" id="password" name="password" required
+        pattern="(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!@#%^&*()\-_=+<>.,~]).{8,30}"
+        title="8-30 chars with uppercase, lowercase, number, and special character">
+    </td>
+
+    <td>Re-enter Password:</td>
+    <td>
+        <input type="password" id="repassword" required
+        title="Must match password"
+        onkeyup="validatePassword()">
+    </td>
+</tr>
+
+<tr>
+    <td>Address Line 1:</td>
+    <td colspan="5">
+        <input type="text" name="address1" required
+        minlength="2" maxlength="30"
+        title="2-30 characters">
+    </td>
+</tr>
+
+<tr>
+    <td>City:</td>
+    <td>
+        <input type="text" name="city" required minlength="2" maxlength="30">
+    </td>
+
+    <td>State:</td>
+    <td>
+        <select name="state" required title="Select a state">
+            <option value="">Select</option>
+            <option>TX</option><option>CA</option><option>NY</option>
+        </select>
+    </td>
+
+    <td>Zip Code:</td>
+    <td>
+        <input type="text" name="zip" required
+        pattern="[0-9]{5}(-[0-9]{4})?"
+        title="5 digits or ZIP+4">
+    </td>
+</tr>
+
+<tr>
+    <td>Health Rating (1–10):</td>
+    <td colspan="5">
+        <input type="range" min="1" max="10" value="5"
+        oninput="updateSlider(this.value)">
+        <span id="sliderValue">5</span>
+    </td>
+</tr>
+
+<tr>
+    <td>Symptoms:</td>
+    <td colspan="5">
+        <textarea name="symptoms" rows="3" cols="50"
+        title="Describe symptoms (optional)"></textarea>
+    </td>
+</tr>
+
+<tr>
+    <td colspan="6" align="center">
+        <input type="button" value="Review" onclick="reviewForm()">
+        <input type="submit" value="Submit">
+        <input type="reset" value="Reset">
+    </td>
+</tr>
+
+</table>
+</form>
+
+<!-- REVIEW SECTION -->
+<div id="reviewSection"></div>
+
+</div>
+
+<hr>
+
+<!-- FOOTER -->
+<div id="footer">
+    <p>PrimeCare Medical Center</p>
+    <p>PO BOX 18881 | Sugar Land TX 77496</p>
+</div>
+
+</body>
+</html>
