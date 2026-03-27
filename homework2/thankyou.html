@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<!--
+Program name: thankyou.html
+Author: Rayyan Zakibaig
+Date created: 02/27/2026
+Date last edited: 02/27/2026
+Version: 1.0
+Description: Confirmation page displayed after successful submission
+of the Patient Registration Form for PrimeCare Medical Center.
+-->
+
+<head>
+    <meta charset="UTF-8">
+    <title>Thank You - PrimeCare Medical Center</title>
+
+    <!-- External CSS -->
+    <link rel="stylesheet" href="style.css">
+
+    <!-- Dynamic Date Script (same as main page for consistency) -->
+    <script>
+        function displayDate() {
+            const today = new Date();
+            const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
+            document.getElementById("currentDate").innerHTML =
+                today.toLocaleDateString('en-US', options);
+        }
+    </script>
+</head>
+
+<body onload="displayDate()">
+
+<!-- ================= HEADER DIV ================= -->
+<div id="header">
+
+    <img src="primecare.png" alt="PrimeCare Logo" width="90">
+
+    <h1>PrimeCare Medical Center</h1>
+
+    <p>Today is: <span id="currentDate"></span></p>
+
+</div>
+
+<hr>
+
+<!-- ================= MAIN DIV ================= -->
+<div id="main" style="text-align:center; padding:40px;">
+
+    <h2>Thank You for Your Submission!</h2>
+
+    <p>
+        Your registration has been successfully received.
+        A member of our medical team will review your information.
+    </p>
+
+    <p>
+        If you need immediate assistance, please contact our office.
+    </p>
+
+    <br>
+
+    <a href="patient-form.html">Return to Registration Form</a>
+
+</div>
+
+<hr>
+
+<!-- ================= FOOTER DIV ================= -->
+<div id="footer">
+
+    <p>PrimeCare Medical Center</p>
+    <p>PO BOX 18881 | Sugar Land TX 77496</p>
+
+    <a href="#">Facebook</a> |
+    <a href="#">Twitter</a>
+
+    <br><br>
+
+    <button onclick="alert('Contact us at support@primecaremedical.com')">
+        Contact Us
+    </button>
+
+</div>
+
+<!-- END OF DOCUMENT -->
+
+</body>
+</html>
