@@ -1,0 +1,58 @@
+/*
+Program name: style.css
+Author: Rayyan Zakibaig
+Date created: 02/27/2026
+Date last edited: 03/27/2026
+Version: 2.0
+Description: stylesheet for PrimeCare Medical Center.
+*/
+
+body {
+    background-color: #e6f2f7;
+    font-family: Arial, sans-serif;
+    color: #333;
+}
+
+#header {
+    text-align: center;
+    background-color: #2f85da;
+    color: white;
+    padding: 15px;
+}
+
+h1, h2 {
+    font-family: Georgia, serif;
+    color: #003366;
+}
+
+#footer {
+    background-color: #2f85da;
+    color: white;
+    text-align: center;
+    padding: 15px;
+}
+
+a {
+    color: #00ccff;
+    text-decoration: none;
+}
+
+a:visited {
+    color: #99ccff;
+}
+
+table {
+    margin: auto;
+}
+
+td {
+    padding: 6px;
+}
+
+.form-section {
+    margin-bottom: 15px;
+}
+
+input[name="firstname"] {
+    border: 2px solid #2f85da;
+}
