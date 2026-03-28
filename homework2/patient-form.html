@@ -4,6 +4,8 @@
 <!--
 Program name: patient-form.html
 Author: Rayyan Zakibaig
+Date created: 02/27/2026
+Date last edited: 03/27/2026
 Version: 2.0
 -->
 
@@ -33,6 +35,7 @@ function displayDate() {
 <hr>
 
 <div id="main">
+
 <h2>Patient Registration Form</h2>
 
 <form id="patientForm">
@@ -73,32 +76,62 @@ function displayDate() {
 <td><input type="text" name="city" required></td>
 
 <td>State *</td>
-<td><select name="state" required><option value="">Select</option><option>TX</option></select></td>
+<td>
+<select name="state" required>
+<option value="">Select</option>
+<option>TX</option><option>CA</option><option>NY</option>
+</select>
+</td>
 
 <td>Zip *</td>
 <td><input type="text" name="zip" required></td>
 </tr>
 
+<!-- CHECKBOXES -->
 <tr>
-<td colspan="6">
-<input type="checkbox" name="conditions" value="Chicken Pox"> Chicken Pox
-<input type="checkbox" name="conditions" value="Measles"> Measles
-<input type="checkbox" name="conditions" value="Mumps"> Mumps
+<td>Pre-Existing Conditions</td>
+<td colspan="5">
+<input type="checkbox" name="conditions" value="Diabetes"> Diabetes
+<input type="checkbox" name="conditions" value="Hypertension"> Hypertension
+<input type="checkbox" name="conditions" value="Asthma"> Asthma
 <input type="checkbox" name="conditions" value="Heart Disease"> Heart Disease
-<input type="checkbox" name="conditions" value="Covid-19"> Covid-19
+<input type="checkbox" name="conditions" value="Severe Allergies"> Severe Allergies
+<input type="checkbox" name="conditions" value="None"> None
+</td>
+</tr>
+
+<!-- RADIO SET 1 -->
+<tr>
+<td>Gender</td>
+<td colspan="5">
+<input type="radio" name="gender" value="Male"> Male
+<input type="radio" name="gender" value="Female"> Female
+<input type="radio" name="gender" value="Other"> Other
+</td>
+</tr>
+
+<!-- RADIO SET 2 -->
+<tr>
+<td>Vaccinated?</td>
+<td colspan="5">
+<input type="radio" name="vaccinated" value="Y"> Yes
+<input type="radio" name="vaccinated" value="N"> No
+</td>
+</tr>
+
+<!-- RADIO SET 3 -->
+<tr>
+<td>Insurance?</td>
+<td colspan="5">
+<input type="radio" name="insurance" value="Y"> Yes
+<input type="radio" name="insurance" value="N"> No
 </td>
 </tr>
 
 <tr>
-<td colspan="6">
-<input type="radio" name="vaccinated" value="Y"> Vaccinated
-<input type="radio" name="vaccinated" value="N"> Not Vaccinated
-</td>
-</tr>
-
-<tr>
-<td colspan="6">
+<td colspan="6" align="center">
 <input type="button" value="Review" onclick="reviewForm()">
+<input type="reset" value="Reset">
 </td>
 </tr>
 
