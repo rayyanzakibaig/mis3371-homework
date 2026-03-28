@@ -1,54 +1,102 @@
-function formatUserID() {
-    let user = document.getElementById("userid");
-    user.value = user.value.toLowerCase();
-}
-
-function validatePassword() {
-    let pass = document.getElementById("password").value;
-    let repass = document.getElementById("repassword").value;
-
-    if (repass && pass !== repass) {
-        document.getElementById("repassword").style.border = "2px solid red";
-    } else {
-        document.getElementById("repassword").style.border = "";
-    }
-}
-
-function updateSlider(val) {
-    document.getElementById("sliderValue").innerText = val;
-}
-
 function reviewForm() {
 
     let f = document.getElementById("patientForm");
 
-    let conditions = [];
-    document.querySelectorAll('input[name="conditions"]:checked')
-        .forEach(c => conditions.push(c.value));
+    let first = f.firstname.value;
+    let mi = f.mi.value;
+    let last = f.lastname.value;
+    let dob = f.dob.value;
+    let email = f.email.value;
+    let phone = f.phone.value;
+    let address = f.address1.value;
+    let city = f.city.value;
+    let state = f.state.value;
+    let zip = f.zip.value;
 
+    // DOB validation
+    let dobStatus = "pass";
+    let today = new Date();
+    let inputDate = new Date(dob);
+
+    if (inputDate > today) {
+        dobStatus = "ERROR: Cannot be in the future";
+    }
+
+    // ZIP validation
+    let zipStatus = zip ? "pass" : "ERROR: Missing Zip Code";
+
+    // Checkbox Y/N mapping
+    let conditions = {
+        "Diabetes": "N",
+        "Hypertension": "N",
+        "Asthma": "N",
+        "Heart Disease": "N",
+        "Severe Allergies": "N",
+        "None": "N"
+    };
+
+    document.querySelectorAll('input[name="conditions"]:checked')
+        .forEach(cb => conditions[cb.value] = "Y");
+
+    // Radio values
     let gender = document.querySelector('input[name="gender"]:checked')?.value || "";
     let vaccinated = document.querySelector('input[name="vaccinated"]:checked')?.value || "";
     let insurance = document.querySelector('input[name="insurance"]:checked')?.value || "";
 
+    // OUTPUT
     document.getElementById("reviewSection").innerHTML = `
-    <h3>PLEASE REVIEW THIS INFORMATION</h3>
 
-    <p><b>Name:</b> ${f.firstname.value} ${f.mi.value} ${f.lastname.value}</p>
-    <p><b>DOB:</b> ${f.dob.value}</p>
-    <p><b>Email:</b> ${f.email.value}</p>
-    <p><b>Phone:</b> ${f.phone.value}</p>
+    <h2>PLEASE REVIEW THIS INFORMATION</h2>
 
-    <p><b>Address:</b><br>
-    ${f.address1.value}<br>
-    ${f.city.value}, ${f.state.value} ${f.zip.value}</p>
+    <table width="100%">
 
-    <p><b>Conditions:</b> ${conditions.join(", ") || "None"}</p>
+    <tr>
+    <td><b>Name</b></td>
+    <td>${first} ${mi} ${last}</td>
+    <td style="color:green">pass</td>
+    </tr>
 
-    <p><b>Gender:</b> ${gender}</p>
-    <p><b>Vaccinated:</b> ${vaccinated}</p>
-    <p><b>Insurance:</b> ${insurance}</p>
+    <tr>
+    <td><b>Date of Birth</b></td>
+    <td>${dob}</td>
+    <td style="color:red">${dobStatus}</td>
+    </tr>
 
-    <p><b>Health Rating:</b> ${document.getElementById("sliderValue").innerText}</p>
-    <p><b>User ID:</b> ${f.userid.value}</p>
+    <tr>
+    <td><b>Email</b></td>
+    <td>${email}</td>
+    <td style="color:green">pass</td>
+    </tr>
+
+    <tr>
+    <td><b>Phone</b></td>
+    <td>${phone}</td>
+    <td style="color:green">pass</td>
+    </tr>
+
+    <tr>
+    <td><b>Address</b></td>
+    <td>${address}<br>${city}, ${state} ${zip}</td>
+    <td style="color:red">${zipStatus}</td>
+    </tr>
+
+    </table>
+
+    <h3>REQUESTED INFO</h3>
+
+    <table>
+
+    <tr><td>Diabetes</td><td>${conditions["Diabetes"]}</td></tr>
+    <tr><td>Hypertension</td><td>${conditions["Hypertension"]}</td></tr>
+    <tr><td>Asthma</td><td>${conditions["Asthma"]}</td></tr>
+    <tr><td>Heart Disease</td><td>${conditions["Heart Disease"]}</td></tr>
+    <tr><td>Severe Allergies</td><td>${conditions["Severe Allergies"]}</td></tr>
+    <tr><td>None</td><td>${conditions["None"]}</td></tr>
+
+    <tr><td>Gender</td><td>${gender}</td></tr>
+    <tr><td>Vaccinated</td><td>${vaccinated}</td></tr>
+    <tr><td>Insurance</td><td>${insurance}</td></tr>
+
+    </table>
     `;
 }
