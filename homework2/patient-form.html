@@ -12,85 +12,86 @@ and JavaScript interactivity for PrimeCare Medical Center.
 -->
 
 <head>
-    <meta charset="UTF-8">
-    <title>PrimeCare Medical Center - Patient Registration</title>
+<meta charset="UTF-8">
+<title>PrimeCare Medical Center</title>
 
-    <link rel="stylesheet" href="style.css">
-    <script src="script.js"></script>
+<link rel="stylesheet" href="style.css">
+<script src="script.js"></script>
 
-    <script>
-        function displayDate() {
-            const today = new Date();
-            document.getElementById("currentDate").innerHTML = today.toDateString();
-        }
-    </script>
+<script>
+function displayDate() {
+    document.getElementById("currentDate").innerHTML = new Date().toDateString();
+}
+</script>
+
 </head>
 
 <body onload="displayDate()">
 
 <div id="header">
-    <img src="primecare.png" width="90">
-    <h1>PrimeCare Medical Center</h1>
-    <p>Today is: <span id="currentDate"></span></p>
+<img src="primecare.png" width="90">
+<h1>PrimeCare Medical Center</h1>
+<p>Today is: <span id="currentDate"></span></p>
 </div>
 
 <hr>
 
 <div id="main">
+
 <h2>Patient Registration Form</h2>
 
-<form id="patientForm" action="thankyou.html" method="post">
+<form id="patientForm" action="thankyou.html">
 
 <table>
 
 <tr>
-<td>First Name: <span class="required">*</span></td>
+<td>First Name <span class="required">*</span></td>
 <td><input type="text" name="firstname" required pattern="[A-Za-z'-]{1,30}" title="Letters only"></td>
 
-<td>Middle Initial:</td>
-<td><input type="text" name="mi" pattern="[A-Za-z]{1}" title="Single letter"></td>
+<td>MI</td>
+<td><input type="text" name="mi" pattern="[A-Za-z]{1}"></td>
 
-<td>Last Name: <span class="required">*</span></td>
+<td>Last Name <span class="required">*</span></td>
 <td><input type="text" name="lastname" required pattern="[A-Za-z0-9'-]{1,30}"></td>
 </tr>
 
 <tr>
-<td>DOB: <span class="required">*</span></td>
+<td>DOB <span class="required">*</span></td>
 <td><input type="date" name="dob" required></td>
 
-<td>ID Number:</td>
+<td>ID</td>
 <td><input type="password" name="id" pattern="[0-9]{3}-[0-9]{2}-[0-9]{4}"></td>
 </tr>
 
 <tr>
-<td>Email: <span class="required">*</span></td>
+<td>Email <span class="required">*</span></td>
 <td><input type="email" name="email" required></td>
 
-<td>Phone:</td>
+<td>Phone</td>
 <td><input type="tel" name="phone" pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}"></td>
 </tr>
 
 <tr>
-<td>User ID: <span class="required">*</span></td>
+<td>User ID <span class="required">*</span></td>
 <td><input type="text" id="userid" name="userid" required pattern="[a-zA-Z][a-zA-Z0-9_-]{4,29}" onblur="formatUserID()"></td>
 
-<td>Password: <span class="required">*</span></td>
+<td>Password <span class="required">*</span></td>
 <td><input type="password" id="password" required></td>
 
-<td>Re-enter: <span class="required">*</span></td>
+<td>Re-enter <span class="required">*</span></td>
 <td><input type="password" id="repassword" onkeyup="validatePassword()"></td>
 </tr>
 
 <tr>
-<td>Address: <span class="required">*</span></td>
+<td>Address <span class="required">*</span></td>
 <td colspan="5"><input type="text" name="address1" required></td>
 </tr>
 
 <tr>
-<td>City: <span class="required">*</span></td>
+<td>City <span class="required">*</span></td>
 <td><input type="text" name="city" required></td>
 
-<td>State:</td>
+<td>State</td>
 <td>
 <select name="state" required>
 <option value="">Select</option>
@@ -98,18 +99,27 @@ and JavaScript interactivity for PrimeCare Medical Center.
 </select>
 </td>
 
-<td>Zip: <span class="required">*</span></td>
+<td>Zip <span class="required">*</span></td>
 <td><input type="text" name="zip" required pattern="[0-9]{5}(-[0-9]{4})?"></td>
 </tr>
 
 <tr>
-<td>Conditions:</td>
+<td>Conditions</td>
 <td colspan="5">
 <input type="checkbox" name="conditions" value="Chicken Pox"> Chicken Pox
 <input type="checkbox" name="conditions" value="Measles"> Measles
 <input type="checkbox" name="conditions" value="Mumps"> Mumps
 <input type="checkbox" name="conditions" value="Diabetes"> Diabetes
 <input type="checkbox" name="conditions" value="Covid-19"> Covid-19
+</td>
+</tr>
+
+<tr>
+<td>Gender</td>
+<td colspan="5">
+<input type="radio" name="gender" value="Male" required> Male
+<input type="radio" name="gender" value="Female"> Female
+<input type="radio" name="gender" value="Other"> Other
 </td>
 </tr>
 
@@ -123,7 +133,16 @@ and JavaScript interactivity for PrimeCare Medical Center.
 </tr>
 
 <tr>
-<td>Health Rating:</td>
+<td>Insurance?</td>
+<td colspan="5">
+<input type="radio" name="insurance" value="Yes" required> Yes
+<input type="radio" name="insurance" value="No"> No
+<input type="radio" name="insurance" value="Unsure"> Unsure
+</td>
+</tr>
+
+<tr>
+<td>Health Rating</td>
 <td colspan="5">
 <input type="range" min="1" max="10" value="5" oninput="updateSlider(this.value)">
 <span id="sliderValue">5</span>
@@ -131,7 +150,7 @@ and JavaScript interactivity for PrimeCare Medical Center.
 </tr>
 
 <tr>
-<td>Symptoms:</td>
+<td>Symptoms</td>
 <td colspan="5"><textarea name="symptoms"></textarea></td>
 </tr>
 
@@ -144,6 +163,7 @@ and JavaScript interactivity for PrimeCare Medical Center.
 </tr>
 
 </table>
+
 </form>
 
 <div id="reviewSection"></div>
