@@ -2,9 +2,8 @@ function reviewForm() {
 
     let f = document.getElementById("patientForm");
 
-    let first = f.firstname.value;
-    let mi = f.mi.value;
-    let last = f.lastname.value;
+    let first = f.firstname.value.trim();
+    let last = f.lastname.value.trim();
     let dob = f.dob.value;
     let email = f.email.value;
     let phone = f.phone.value;
@@ -13,19 +12,22 @@ function reviewForm() {
     let state = f.state.value;
     let zip = f.zip.value;
 
-    // DOB validation
-    let dobStatus = "pass";
-    let today = new Date();
-    let inputDate = new Date(dob);
-
-    if (inputDate > today) {
-        dobStatus = "ERROR: Cannot be in the future";
+    // VALIDATION FUNCTIONS
+    function status(condition, errorMsg) {
+        return condition ? '<span style="color:green">pass</span>'
+                         : `<span style="color:red">ERROR: ${errorMsg}</span>`;
     }
 
-    // ZIP validation
-    let zipStatus = zip ? "pass" : "ERROR: Missing Zip Code";
+    let today = new Date();
+    let dobDate = new Date(dob);
 
-    // Checkbox Y/N mapping
+    let nameStatus = status(first && last, "Missing name");
+    let dobStatus = status(dob && dobDate <= today, "Date in the future");
+    let emailStatus = status(email.includes("@"), "Invalid email");
+    let phoneStatus = status(phone.length >= 10, "Invalid phone");
+    let zipStatus = status(zip, "Missing Zip Code");
+
+    // CHECKBOXES Y/N
     let conditions = {
         "Diabetes": "N",
         "Hypertension": "N",
@@ -38,10 +40,10 @@ function reviewForm() {
     document.querySelectorAll('input[name="conditions"]:checked')
         .forEach(cb => conditions[cb.value] = "Y");
 
-    // Radio values
-    let gender = document.querySelector('input[name="gender"]:checked')?.value || "";
-    let vaccinated = document.querySelector('input[name="vaccinated"]:checked')?.value || "";
-    let insurance = document.querySelector('input[name="insurance"]:checked')?.value || "";
+    // RADIOS
+    let gender = document.querySelector('input[name="gender"]:checked')?.value || "N/A";
+    let vaccinated = document.querySelector('input[name="vaccinated"]:checked')?.value || "N/A";
+    let insurance = document.querySelector('input[name="insurance"]:checked')?.value || "N/A";
 
     // OUTPUT
     document.getElementById("reviewSection").innerHTML = `
@@ -49,43 +51,16 @@ function reviewForm() {
     <h2>PLEASE REVIEW THIS INFORMATION</h2>
 
     <table width="100%">
-
-    <tr>
-    <td><b>Name</b></td>
-    <td>${first} ${mi} ${last}</td>
-    <td style="color:green">pass</td>
-    </tr>
-
-    <tr>
-    <td><b>Date of Birth</b></td>
-    <td>${dob}</td>
-    <td style="color:red">${dobStatus}</td>
-    </tr>
-
-    <tr>
-    <td><b>Email</b></td>
-    <td>${email}</td>
-    <td style="color:green">pass</td>
-    </tr>
-
-    <tr>
-    <td><b>Phone</b></td>
-    <td>${phone}</td>
-    <td style="color:green">pass</td>
-    </tr>
-
-    <tr>
-    <td><b>Address</b></td>
-    <td>${address}<br>${city}, ${state} ${zip}</td>
-    <td style="color:red">${zipStatus}</td>
-    </tr>
-
+    <tr><td>Name</td><td>${first} ${last}</td><td>${nameStatus}</td></tr>
+    <tr><td>Date of Birth</td><td>${dob}</td><td>${dobStatus}</td></tr>
+    <tr><td>Email</td><td>${email}</td><td>${emailStatus}</td></tr>
+    <tr><td>Phone</td><td>${phone}</td><td>${phoneStatus}</td></tr>
+    <tr><td>Address</td><td>${address}, ${city}, ${state} ${zip}</td><td>${zipStatus}</td></tr>
     </table>
 
     <h3>REQUESTED INFO</h3>
 
     <table>
-
     <tr><td>Diabetes</td><td>${conditions["Diabetes"]}</td></tr>
     <tr><td>Hypertension</td><td>${conditions["Hypertension"]}</td></tr>
     <tr><td>Asthma</td><td>${conditions["Asthma"]}</td></tr>
@@ -96,7 +71,6 @@ function reviewForm() {
     <tr><td>Gender</td><td>${gender}</td></tr>
     <tr><td>Vaccinated</td><td>${vaccinated}</td></tr>
     <tr><td>Insurance</td><td>${insurance}</td></tr>
-
     </table>
     `;
 }
