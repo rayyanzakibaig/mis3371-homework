@@ -4,8 +4,8 @@
 <!--
 Program name: patient-form.html
 Author: Rayyan Zakibaig
-Date created: 02/27/2026
-Date last edited: 03/27/2026
+Date Created: 2/27/2026
+Date Edited 3/27/2026
 Version: 2.0
 -->
 
@@ -21,6 +21,13 @@ function displayDate() {
     document.getElementById("currentDate").innerHTML = new Date().toDateString();
 }
 </script>
+
+<style>
+.required {
+    color: red;
+    font-weight: bold;
+}
+</style>
 
 </head>
 
@@ -38,28 +45,28 @@ function displayDate() {
 
 <h2>Patient Registration Form</h2>
 
-<form id="patientForm">
+<form id="patientForm" action="thankyou.html">
 
 <table>
 
 <tr>
-<td>First Name *</td>
+<td>First Name <span class="required">*</span></td>
 <td><input type="text" name="firstname" required></td>
 
 <td>MI</td>
 <td><input type="text" name="mi"></td>
 
-<td>Last Name *</td>
+<td>Last Name <span class="required">*</span></td>
 <td><input type="text" name="lastname" required></td>
 </tr>
 
 <tr>
-<td>DOB *</td>
+<td>Date of Birth <span class="required">*</span></td>
 <td><input type="date" name="dob" required></td>
 </tr>
 
 <tr>
-<td>Email *</td>
+<td>Email <span class="required">*</span></td>
 <td><input type="email" name="email" required></td>
 
 <td>Phone</td>
@@ -67,29 +74,32 @@ function displayDate() {
 </tr>
 
 <tr>
-<td>Address *</td>
+<td>Address <span class="required">*</span></td>
 <td colspan="5"><input type="text" name="address1" required></td>
 </tr>
 
 <tr>
-<td>City *</td>
+<td>City <span class="required">*</span></td>
 <td><input type="text" name="city" required></td>
 
-<td>State *</td>
+<td>State <span class="required">*</span></td>
 <td>
 <select name="state" required>
 <option value="">Select</option>
-<option>TX</option><option>CA</option><option>NY</option>
+<option value="TX">TX</option>
+<option value="CA">CA</option>
+<option value="NY">NY</option>
+<!-- keep your full state list here -->
 </select>
 </td>
 
-<td>Zip *</td>
+<td>Zip <span class="required">*</span></td>
 <td><input type="text" name="zip" required></td>
 </tr>
 
 <!-- CHECKBOXES -->
 <tr>
-<td>Pre-Existing Conditions</td>
+<td>Conditions</td>
 <td colspan="5">
 <input type="checkbox" name="conditions" value="Diabetes"> Diabetes
 <input type="checkbox" name="conditions" value="Hypertension"> Hypertension
@@ -100,7 +110,7 @@ function displayDate() {
 </td>
 </tr>
 
-<!-- RADIO SET 1 -->
+<!-- RADIO GROUPS -->
 <tr>
 <td>Gender</td>
 <td colspan="5">
@@ -110,7 +120,6 @@ function displayDate() {
 </td>
 </tr>
 
-<!-- RADIO SET 2 -->
 <tr>
 <td>Vaccinated?</td>
 <td colspan="5">
@@ -119,7 +128,6 @@ function displayDate() {
 </td>
 </tr>
 
-<!-- RADIO SET 3 -->
 <tr>
 <td>Insurance?</td>
 <td colspan="5">
@@ -131,6 +139,7 @@ function displayDate() {
 <tr>
 <td colspan="6" align="center">
 <input type="button" value="Review" onclick="reviewForm()">
+<input type="submit" value="Submit">
 <input type="reset" value="Reset">
 </td>
 </tr>
