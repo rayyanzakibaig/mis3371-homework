@@ -26,10 +26,12 @@ function reviewForm() {
     document.querySelectorAll('input[name="conditions"]:checked')
         .forEach(c => conditions.push(c.value));
 
+    let gender = document.querySelector('input[name="gender"]:checked')?.value || "";
     let vaccinated = document.querySelector('input[name="vaccinated"]:checked')?.value || "";
+    let insurance = document.querySelector('input[name="insurance"]:checked')?.value || "";
 
     document.getElementById("reviewSection").innerHTML = `
-    <h3>PLEASE REVIEW</h3>
+    <h3>PLEASE REVIEW THIS INFORMATION</h3>
 
     <p><b>Name:</b> ${f.firstname.value} ${f.mi.value} ${f.lastname.value}</p>
     <p><b>DOB:</b> ${f.dob.value}</p>
@@ -40,8 +42,11 @@ function reviewForm() {
     ${f.address1.value}<br>
     ${f.city.value}, ${f.state.value} ${f.zip.value}</p>
 
-    <p><b>Conditions:</b> ${conditions.join(", ")}</p>
+    <p><b>Conditions:</b> ${conditions.join(", ") || "None"}</p>
+
+    <p><b>Gender:</b> ${gender}</p>
     <p><b>Vaccinated:</b> ${vaccinated}</p>
+    <p><b>Insurance:</b> ${insurance}</p>
 
     <p><b>Health Rating:</b> ${document.getElementById("sliderValue").innerText}</p>
     <p><b>User ID:</b> ${f.userid.value}</p>
