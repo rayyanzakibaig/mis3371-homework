@@ -2,4 +2,5 @@
 
 This is the link to the patient form website for a clinic.
 
-https://rayyanzakibaig.github.io/mis3371-homework/patient-form.html
+https://rayyanzakibaig.github.io/mis3371-homework/
+
