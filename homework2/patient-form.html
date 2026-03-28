@@ -29,7 +29,7 @@ function displayDate() {
 <body onload="displayDate()">
 
 <div id="header">
-<img src="primecare.png" width="90">
+<img src="primecare.png" alt="Logo" width="90">
 <h1>PrimeCare Medical Center</h1>
 <p>Today is: <span id="currentDate"></span></p>
 </div>
@@ -40,40 +40,40 @@ function displayDate() {
 
 <h2>Patient Registration Form</h2>
 
-<form id="patientForm" action="thankyou.html">
+<form id="patientForm" action="thankyou.html" method="post">
 
 <table>
 
 <tr>
 <td>First Name <span class="required">*</span></td>
-<td><input type="text" name="firstname" required pattern="[A-Za-z'-]{1,30}" title="Letters only"></td>
+<td><input type="text" name="firstname" required pattern="[A-Za-z'-]{1,30}" title="Letters, apostrophes, dashes only"></td>
 
 <td>MI</td>
-<td><input type="text" name="mi" pattern="[A-Za-z]{1}"></td>
+<td><input type="text" name="mi" pattern="[A-Za-z]{1}" title="Single letter only"></td>
 
 <td>Last Name <span class="required">*</span></td>
-<td><input type="text" name="lastname" required pattern="[A-Za-z0-9'-]{1,30}"></td>
+<td><input type="text" name="lastname" required pattern="[A-Za-z0-9'-]{1,30}" title="Letters, numbers, apostrophes, dashes"></td>
 </tr>
 
 <tr>
 <td>DOB <span class="required">*</span></td>
-<td><input type="date" name="dob" required></td>
+<td><input type="date" name="dob" required title="Select valid date"></td>
 
 <td>ID</td>
-<td><input type="password" name="id" pattern="[0-9]{3}-[0-9]{2}-[0-9]{4}"></td>
+<td><input type="password" name="id" pattern="[0-9]{3}-[0-9]{2}-[0-9]{4}" title="Format XXX-XX-XXXX"></td>
 </tr>
 
 <tr>
 <td>Email <span class="required">*</span></td>
-<td><input type="email" name="email" required></td>
+<td><input type="email" name="email" required title="example@email.com"></td>
 
 <td>Phone</td>
-<td><input type="tel" name="phone" pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}"></td>
+<td><input type="tel" name="phone" pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}" title="123-456-7890"></td>
 </tr>
 
 <tr>
 <td>User ID <span class="required">*</span></td>
-<td><input type="text" id="userid" name="userid" required pattern="[a-zA-Z][a-zA-Z0-9_-]{4,29}" onblur="formatUserID()"></td>
+<td><input type="text" id="userid" name="userid" required pattern="[a-zA-Z][a-zA-Z0-9_-]{4,29}" title="5-30 chars, start with letter, no spaces" onblur="formatUserID()"></td>
 
 <td>Password <span class="required">*</span></td>
 <td><input type="password" id="password" required></td>
@@ -84,23 +84,77 @@ function displayDate() {
 
 <tr>
 <td>Address <span class="required">*</span></td>
-<td colspan="5"><input type="text" name="address1" required></td>
+<td colspan="5"><input type="text" name="address1" required minlength="2" maxlength="30" title="2-30 characters"></td>
 </tr>
 
 <tr>
 <td>City <span class="required">*</span></td>
-<td><input type="text" name="city" required></td>
+<td><input type="text" name="city" required minlength="2" maxlength="30"></td>
 
-<td>State</td>
+<td>State <span class="required">*</span></td>
 <td>
-<select name="state" required>
+<select name="state" required title="Select a state">
 <option value="">Select</option>
-<option>TX</option><option>CA</option><option>NY</option>
+
+<option value="AL">AL</option>
+<option value="AK">AK</option>
+<option value="AZ">AZ</option>
+<option value="AR">AR</option>
+<option value="CA">CA</option>
+<option value="CO">CO</option>
+<option value="CT">CT</option>
+<option value="DE">DE</option>
+<option value="DC">DC</option>
+<option value="FL">FL</option>
+<option value="GA">GA</option>
+<option value="HI">HI</option>
+<option value="ID">ID</option>
+<option value="IL">IL</option>
+<option value="IN">IN</option>
+<option value="IA">IA</option>
+<option value="KS">KS</option>
+<option value="KY">KY</option>
+<option value="LA">LA</option>
+<option value="ME">ME</option>
+<option value="MD">MD</option>
+<option value="MA">MA</option>
+<option value="MI">MI</option>
+<option value="MN">MN</option>
+<option value="MS">MS</option>
+<option value="MO">MO</option>
+<option value="MT">MT</option>
+<option value="NE">NE</option>
+<option value="NV">NV</option>
+<option value="NH">NH</option>
+<option value="NJ">NJ</option>
+<option value="NM">NM</option>
+<option value="NY">NY</option>
+<option value="NC">NC</option>
+<option value="ND">ND</option>
+<option value="OH">OH</option>
+<option value="OK">OK</option>
+<option value="OR">OR</option>
+<option value="PA">PA</option>
+<option value="RI">RI</option>
+<option value="SC">SC</option>
+<option value="SD">SD</option>
+<option value="TN">TN</option>
+<option value="TX">TX</option>
+<option value="UT">UT</option>
+<option value="VT">VT</option>
+<option value="VA">VA</option>
+<option value="WA">WA</option>
+<option value="WV">WV</option>
+<option value="WI">WI</option>
+<option value="WY">WY</option>
+
+<option value="PR">PR</option>
+
 </select>
 </td>
 
 <td>Zip <span class="required">*</span></td>
-<td><input type="text" name="zip" required pattern="[0-9]{5}(-[0-9]{4})?"></td>
+<td><input type="text" name="zip" required pattern="[0-9]{5}(-[0-9]{4})?" title="5-digit or ZIP+4"></td>
 </tr>
 
 <tr>
@@ -151,7 +205,9 @@ function displayDate() {
 
 <tr>
 <td>Symptoms</td>
-<td colspan="5"><textarea name="symptoms"></textarea></td>
+<td colspan="5">
+<textarea name="symptoms" title="Optional description"></textarea>
+</td>
 </tr>
 
 <tr>
