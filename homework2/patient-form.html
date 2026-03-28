@@ -4,9 +4,10 @@
 <!--
 Program name: patient-form.html
 Author: Rayyan Zakibaig
-Date Created: 2/27/2026
-Date Edited 3/27/2026
+Date created: 02/27/2026
+Date last edited: 03/27/2026
 Version: 2.0
+Description: Fully validated patient form with review functionality
 -->
 
 <head>
@@ -34,7 +35,7 @@ function displayDate() {
 <body onload="displayDate()">
 
 <div id="header">
-<img src="primecare.png" width="90">
+<img src="primecare.png" alt="logo" width="90">
 <h1>PrimeCare Medical Center</h1>
 <p>Today is: <span id="currentDate"></span></p>
 </div>
@@ -51,13 +52,13 @@ function displayDate() {
 
 <tr>
 <td>First Name <span class="required">*</span></td>
-<td><input type="text" name="firstname" required></td>
+<td><input type="text" name="firstname" required title="Enter first name"></td>
 
 <td>MI</td>
-<td><input type="text" name="mi"></td>
+<td><input type="text" name="mi" title="Middle initial"></td>
 
 <td>Last Name <span class="required">*</span></td>
-<td><input type="text" name="lastname" required></td>
+<td><input type="text" name="lastname" required title="Enter last name"></td>
 </tr>
 
 <tr>
@@ -67,10 +68,10 @@ function displayDate() {
 
 <tr>
 <td>Email <span class="required">*</span></td>
-<td><input type="email" name="email" required></td>
+<td><input type="email" name="email" required title="example@email.com"></td>
 
 <td>Phone</td>
-<td><input type="tel" name="phone"></td>
+<td><input type="tel" name="phone" title="123-456-7890"></td>
 </tr>
 
 <tr>
@@ -86,20 +87,32 @@ function displayDate() {
 <td>
 <select name="state" required>
 <option value="">Select</option>
-<option value="TX">TX</option>
-<option value="CA">CA</option>
-<option value="NY">NY</option>
-<!-- keep your full state list here -->
+
+<option>AL</option><option>AK</option><option>AZ</option><option>AR</option>
+<option>CA</option><option>CO</option><option>CT</option><option>DE</option>
+<option>DC</option><option>FL</option><option>GA</option><option>HI</option>
+<option>ID</option><option>IL</option><option>IN</option><option>IA</option>
+<option>KS</option><option>KY</option><option>LA</option><option>ME</option>
+<option>MD</option><option>MA</option><option>MI</option><option>MN</option>
+<option>MS</option><option>MO</option><option>MT</option><option>NE</option>
+<option>NV</option><option>NH</option><option>NJ</option><option>NM</option>
+<option>NY</option><option>NC</option><option>ND</option><option>OH</option>
+<option>OK</option><option>OR</option><option>PA</option><option>RI</option>
+<option>SC</option><option>SD</option><option>TN</option><option>TX</option>
+<option>UT</option><option>VT</option><option>VA</option><option>WA</option>
+<option>WV</option><option>WI</option><option>WY</option>
+<option>PR</option>
+
 </select>
 </td>
 
 <td>Zip <span class="required">*</span></td>
-<td><input type="text" name="zip" required></td>
+<td><input type="text" name="zip" required pattern="[0-9]{5}(-[0-9]{4})?" title="5 digit or ZIP+4"></td>
 </tr>
 
 <!-- CHECKBOXES -->
 <tr>
-<td>Conditions</td>
+<td>Pre-Existing Conditions</td>
 <td colspan="5">
 <input type="checkbox" name="conditions" value="Diabetes"> Diabetes
 <input type="checkbox" name="conditions" value="Hypertension"> Hypertension
@@ -136,6 +149,38 @@ function displayDate() {
 </td>
 </tr>
 
+<!-- SLIDER -->
+<tr>
+<td>Desired Salary</td>
+<td colspan="5">
+<input type="range" min="20000" max="200000" step="1000"
+oninput="updateSlider(this.value)">
+<span id="sliderValue">20000</span>
+</td>
+</tr>
+
+<!-- TEXTAREA -->
+<tr>
+<td>Symptoms</td>
+<td colspan="5">
+<textarea name="symptoms" pattern='[^"]*' title="Optional"></textarea>
+</td>
+</tr>
+
+<!-- USER ID + PASSWORD -->
+<tr>
+<td>User ID <span class="required">*</span></td>
+<td><input type="text" id="userid" name="userid"
+pattern="[a-zA-Z][a-zA-Z0-9_-]{4,29}" onblur="formatUserID()" required></td>
+
+<td>Password <span class="required">*</span></td>
+<td><input type="password" name="password" required></td>
+
+<td>Re-enter <span class="required">*</span></td>
+<td><input type="password" name="repassword" required></td>
+</tr>
+
+<!-- BUTTONS -->
 <tr>
 <td colspan="6" align="center">
 <input type="button" value="Review" onclick="reviewForm()">
@@ -150,6 +195,12 @@ function displayDate() {
 
 <div id="reviewSection"></div>
 
+</div>
+
+<hr>
+
+<div id="footer">
+<p>PrimeCare Medical Center</p>
 </div>
 
 </body>
