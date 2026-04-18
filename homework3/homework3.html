@@ -1,0 +1,322 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<!--
+Program name: homework3.html
+Author: Rayyan Zakibaig
+Date created: 02/27/2026
+Date last edited: 04/17/2026
+Version: 3.0
+Description: HW3 PrimeCare Patient Registration with live JS validation
+-->
+
+<head>
+<meta charset="UTF-8">
+<title>PrimeCare Medical Center</title>
+<link rel="stylesheet" href="style.css">
+<script src="script.js" defer></script>
+</head>
+
+<body onload="document.getElementById('currentDate').innerHTML = new Date().toDateString()">
+
+<div id="header">
+  <img src="primecare.png" width="90" alt="PrimeCare Logo">
+  <h1>PrimeCare Medical Center</h1>
+  <p>Today is: <span id="currentDate"></span></p>
+</div>
+
+<hr>
+
+<div id="main">
+<h2>Patient Registration Form</h2>
+<p>Fields marked with <span class="required">*</span> are required. Errors will appear in red as you fill out the form.</p>
+
+<form id="patientForm" action="thankyou.html" method="get" onsubmit="return validateAll()">
+
+<table>
+
+<!-- ===== NAME ROW ===== -->
+<tr>
+  <td><label for="firstname">First Name<span class="required">*</span></label></td>
+  <td>
+    <input type="text" id="firstname" name="firstname"
+           minlength="1" maxlength="30"
+           placeholder="e.g. John"
+           title="First name: 1-30 letters, apostrophes, or dashes only. No numbers or special characters."
+           pattern="[A-Za-z'-]+"
+           onblur="validateFirstName()" oninput="validateFirstName()">
+    <div id="fnameError" class="error"></div>
+  </td>
+
+  <td><label for="mi">MI</label></td>
+  <td>
+    <input type="text" id="mi" name="mi" maxlength="1"
+           placeholder="A"
+           title="Optional: single letter middle initial only. No numbers."
+           pattern="[A-Za-z]"
+           class="short-input"
+           onblur="validateMI()" oninput="validateMI()">
+    <div id="miError" class="error"></div>
+  </td>
+
+  <td><label for="lastname">Last Name<span class="required">*</span></label></td>
+  <td>
+    <input type="text" id="lastname" name="lastname"
+           minlength="1" maxlength="30"
+           placeholder="e.g. Smith"
+           title="Last name: 1-30 letters, apostrophes, or dashes only. No numbers or special characters."
+           pattern="[A-Za-z'-]+"
+           onblur="validateLastName()" oninput="validateLastName()">
+    <div id="lnameError" class="error"></div>
+  </td>
+</tr>
+
+<!-- ===== DATE OF BIRTH ===== -->
+<tr>
+  <td><label for="dob">Date of Birth<span class="required">*</span></label></td>
+  <td colspan="5">
+    <input type="date" id="dob" name="dob"
+           title="Your date of birth. Must not be in the future or more than 120 years ago."
+           onblur="validateDOB()" onchange="validateDOB()">
+    <div id="dobError" class="error"></div>
+  </td>
+</tr>
+
+<!-- ===== PATIENT ID (SSN) ===== -->
+<tr>
+  <td><label for="ssn">Patient ID<span class="required">*</span></label></td>
+  <td colspan="5">
+    <input type="password" id="ssn" name="ssn" maxlength="11"
+           placeholder="###-##-####"
+           title="9-digit patient ID (digits only, no letters). Auto-formats as ###-##-####. Do NOT enter your real Social Security Number."
+           oninput="formatSSN(this)" onblur="validateSSN()">
+    <span class="hint">Digits only &mdash; auto-formats as ###-##-####</span>
+    <div id="ssnError" class="error"></div>
+  </td>
+</tr>
+
+<!-- ===== EMAIL / PHONE ===== -->
+<tr>
+  <td><label for="email">Email<span class="required">*</span></label></td>
+  <td>
+    <input type="email" id="email" name="email"
+           placeholder="name@domain.com"
+           title="Valid email address in the format: name@domain.tld. Will be converted to lowercase."
+           onblur="validateEmail()" oninput="validateEmail()">
+    <div id="emailError" class="error"></div>
+  </td>
+
+  <td><label for="phone">Phone</label></td>
+  <td colspan="3">
+    <input type="tel" id="phone" name="phone"
+           placeholder="(555) 555-5555"
+           title="Optional: 10-digit US phone number. Format: (555) 555-5555."
+           onblur="validatePhone()" oninput="validatePhone()">
+    <div id="phoneError" class="error"></div>
+  </td>
+</tr>
+
+<!-- ===== ADDRESS 1 ===== -->
+<tr>
+  <td><label for="address1">Address<span class="required">*</span></label></td>
+  <td colspan="5">
+    <input type="text" id="address1" name="address1"
+           minlength="2" maxlength="50"
+           placeholder="e.g. 123 Main Street"
+           title="Street address: required, 2-50 characters."
+           class="wide-input"
+           onblur="validateAddress1()" oninput="validateAddress1()">
+    <div id="addr1Error" class="error"></div>
+  </td>
+</tr>
+
+<!-- ===== ADDRESS 2 ===== -->
+<tr>
+  <td><label for="address2">Address 2</label></td>
+  <td colspan="5">
+    <input type="text" id="address2" name="address2"
+           minlength="2" maxlength="50"
+           placeholder="e.g. Apt 4B (optional)"
+           title="Optional: apartment, suite, unit, etc. If entered, must be 2-50 characters."
+           class="wide-input"
+           onblur="validateAddress2()" oninput="validateAddress2()">
+    <div id="addr2Error" class="error"></div>
+  </td>
+</tr>
+
+<!-- ===== CITY / STATE / ZIP ===== -->
+<tr>
+  <td><label for="city">City<span class="required">*</span></label></td>
+  <td>
+    <input type="text" id="city" name="city"
+           minlength="2" maxlength="30"
+           placeholder="e.g. Houston"
+           title="City name: required, 2-30 characters, letters only."
+           onblur="validateCity()" oninput="validateCity()">
+    <div id="cityError" class="error"></div>
+  </td>
+
+  <td><label for="state">State<span class="required">*</span></label></td>
+  <td>
+    <select id="state" name="state"
+            title="Select your U.S. state or territory."
+            onblur="validateState()" onchange="validateState()">
+      <option value="">-- Select --</option>
+      <option>AL</option><option>AK</option><option>AZ</option><option>AR</option>
+      <option>CA</option><option>CO</option><option>CT</option><option>DE</option>
+      <option>DC</option><option>FL</option><option>GA</option><option>HI</option>
+      <option>ID</option><option>IL</option><option>IN</option><option>IA</option>
+      <option>KS</option><option>KY</option><option>LA</option><option>ME</option>
+      <option>MD</option><option>MA</option><option>MI</option><option>MN</option>
+      <option>MS</option><option>MO</option><option>MT</option><option>NE</option>
+      <option>NV</option><option>NH</option><option>NJ</option><option>NM</option>
+      <option>NY</option><option>NC</option><option>ND</option><option>OH</option>
+      <option>OK</option><option>OR</option><option>PA</option><option>RI</option>
+      <option>SC</option><option>SD</option><option>TN</option><option>TX</option>
+      <option>UT</option><option>VT</option><option>VA</option><option>WA</option>
+      <option>WV</option><option>WI</option><option>WY</option>
+      <option>PR</option>
+    </select>
+    <div id="stateError" class="error"></div>
+  </td>
+
+  <td><label for="zip">Zip<span class="required">*</span></label></td>
+  <td>
+    <input type="text" id="zip" name="zip" maxlength="5"
+           placeholder="e.g. 77001"
+           title="ZIP code: required, exactly 5 digits, no letters."
+           pattern="\d{5}"
+           class="zip-input"
+           onblur="validateZip()" oninput="validateZip()">
+    <div id="zipError" class="error"></div>
+  </td>
+</tr>
+
+<!-- ===== CHECKBOXES (at least 5) ===== -->
+<tr>
+  <td title="Check every condition that currently applies to you">Conditions</td>
+  <td colspan="5">
+    Check all medical conditions that apply:
+    <div class="checkbox-group">
+      <label><input type="checkbox" name="conditions" value="Diabetes"> Diabetes</label>
+      <label><input type="checkbox" name="conditions" value="Asthma"> Asthma</label>
+      <label><input type="checkbox" name="conditions" value="Covid-19"> Covid-19</label>
+      <label><input type="checkbox" name="conditions" value="Heart Disease"> Heart Disease</label>
+      <label><input type="checkbox" name="conditions" value="Hypertension"> Hypertension</label>
+      <label><input type="checkbox" name="conditions" value="None"> None of the above</label>
+    </div>
+  </td>
+</tr>
+
+<!-- ===== RADIO: GENDER (at least 3) ===== -->
+<tr>
+  <td title="Select the gender you identify with">Gender<span class="required">*</span></td>
+  <td colspan="5">
+    <label><input type="radio" name="gender" value="Male" onchange="validateGender()"> Male</label>
+    <label><input type="radio" name="gender" value="Female" onchange="validateGender()"> Female</label>
+    <label><input type="radio" name="gender" value="Other" onchange="validateGender()"> Other</label>
+    <label><input type="radio" name="gender" value="Prefer not to say" onchange="validateGender()"> Prefer not to say</label>
+    <div id="genderError" class="error"></div>
+  </td>
+</tr>
+
+<!-- ===== RADIO: VACCINATED ===== -->
+<tr>
+  <td title="Have you received a COVID-19 vaccine?">Vaccinated?<span class="required">*</span></td>
+  <td colspan="5">
+    <label><input type="radio" name="vaccinated" value="Y" onchange="validateVaccinated()"> Yes</label>
+    <label><input type="radio" name="vaccinated" value="N" onchange="validateVaccinated()"> No</label>
+    <div id="vaccError" class="error"></div>
+  </td>
+</tr>
+
+<!-- ===== RADIO: INSURANCE ===== -->
+<tr>
+  <td title="Do you currently have active health insurance?">Insurance?<span class="required">*</span></td>
+  <td colspan="5">
+    <label><input type="radio" name="insurance" value="Y" onchange="validateInsurance()"> Yes</label>
+    <label><input type="radio" name="insurance" value="N" onchange="validateInsurance()"> No</label>
+    <div id="insError" class="error"></div>
+  </td>
+</tr>
+
+<!-- ===== SLIDER ===== -->
+<tr>
+  <td title="Rate your overall health from 1 (Poor) to 10 (Excellent)">Health Rating</td>
+  <td colspan="5">
+    Rate your overall health (1 = Poor, 10 = Excellent):
+    <input type="range" id="healthRating" name="healthRating" min="1" max="10" value="5"
+           title="Slide left for worse health, right for better health. 1=Poor, 10=Excellent."
+           oninput="updateSlider(this.value)">
+    <span id="sliderValue" class="slider-val">5</span> / 10
+  </td>
+</tr>
+
+<!-- ===== SYMPTOMS TEXTAREA ===== -->
+<tr>
+  <td title="Describe any symptoms or your reason for visiting PrimeCare today">Symptoms</td>
+  <td colspan="5">
+    <textarea id="symptoms" name="symptoms" rows="3" cols="50"
+              placeholder="Optional: describe your current symptoms or reason for this visit (e.g. persistent cough, annual checkup)"
+              title="Optional: briefly describe your symptoms or reason for visiting. Free text."></textarea>
+  </td>
+</tr>
+
+<!-- ===== USER ID ===== -->
+<tr>
+  <td><label for="userid">User ID<span class="required">*</span></label></td>
+  <td colspan="5">
+    <input type="text" id="userid" name="userid" maxlength="20"
+           placeholder="e.g. jsmith_01"
+           title="User ID rules: 5-20 characters, letters/numbers/dashes/underscores only. Cannot start with a number. No spaces or special characters.">
+    <span class="hint">5-20 chars &bull; letters, numbers, - and _ only &bull; cannot start with a number</span>
+    <div id="useridError" class="error"></div>
+  </td>
+</tr>
+
+<!-- ===== PASSWORD ===== -->
+<tr>
+  <td><label for="password">Password<span class="required">*</span></label></td>
+  <td>
+    <input type="password" id="password" name="password" maxlength="30"
+           title="Password rules: 8-30 characters, must include at least 1 uppercase letter, 1 lowercase letter, and 1 digit. Cannot equal your User ID."
+           onblur="validatePassword()" oninput="validatePassword()">
+    <span class="hint">8+ chars &bull; 1 upper &bull; 1 lower &bull; 1 digit</span>
+    <div id="pwdError" class="error"></div>
+  </td>
+
+  <td><label for="repassword">Re-enter Password<span class="required">*</span></label></td>
+  <td colspan="3">
+    <input type="password" id="repassword" name="repassword" maxlength="30"
+           title="Re-type your password exactly as above to confirm it."
+           onblur="validateConfirmPassword()" oninput="validateConfirmPassword()">
+    <div id="repwdError" class="error"></div>
+  </td>
+</tr>
+
+<!-- ===== BUTTONS ===== -->
+<tr>
+  <td colspan="6" class="btn-row">
+    <input type="button" value="Review" onclick="reviewForm()" title="Preview all entered data">
+    <input type="button" value="Validate" onclick="handleValidate()" title="Check all fields for errors. Submit button appears only when everything is valid.">
+    <input type="submit" id="submitBtn" value="Submit" style="display:none" title="Submit your registration">
+    <input type="reset" onclick="resetForm()" title="Clear all fields and start over">
+  </td>
+</tr>
+
+</table>
+</form>
+
+<div id="reviewSection"></div>
+
+</div>
+
+<hr>
+
+<div id="footer">
+  <p>PrimeCare Medical Center &copy; 2026</p>
+  <button onclick="alert('Contact us at support@primecare.com')">Contact Us</button>
+</div>
+
+</body>
+</html>
