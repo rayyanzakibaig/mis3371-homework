@@ -268,7 +268,8 @@ Description: HW3 PrimeCare Patient Registration with live JS validation
   <td colspan="5">
     <input type="text" id="userid" name="userid" maxlength="20"
            placeholder="e.g. jsmith_01"
-           title="User ID rules: 5-20 characters, letters/numbers/dashes/underscores only. Cannot start with a number. No spaces or special characters.">
+           title="User ID rules: 5-20 characters, letters/numbers/dashes/underscores only. Cannot start with a number. No spaces or special characters."
+           onblur="validateUserID()" oninput="validateUserID()">
     <span class="hint">5-20 chars &bull; letters, numbers, - and _ only &bull; cannot start with a number</span>
     <div id="useridError" class="error"></div>
   </td>
