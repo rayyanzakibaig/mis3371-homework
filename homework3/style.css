@@ -1,0 +1,94 @@
+/*
+Program name: style.css
+Author: Rayyan Zakibaig
+Date created: 02/27/2026
+Date last edited: 04/17/2026
+Version: 3.0
+Description: stylesheet for PrimeCare Medical Center.
+*/
+
+body {
+    background-color: #e6f2f7;
+    font-family: Arial, sans-serif;
+    color: #333;
+}
+
+#header {
+    text-align: center;
+    background-color: #2f85da;
+    color: white;
+    padding: 15px;
+}
+
+h1, h2 {
+    font-family: Georgia, serif;
+    color: #003366;
+}
+
+#footer {
+    background-color: #2f85da;
+    color: white;
+    text-align: center;
+    padding: 15px;
+}
+
+/* LINKS */
+a {
+    color: #00ccff;
+    text-decoration: none;
+}
+
+a:visited {
+    color: #99ccff;
+}
+
+/* TABLE */
+table {
+    margin: auto;
+}
+
+td {
+    padding: 6px;
+}
+
+/* INPUTS */
+input, select, textarea {
+    padding: 5px;
+    border-radius: 4px;
+}
+
+/* BUTTONS */
+input[type="button"],
+input[type="submit"],
+input[type="reset"],
+button {
+    background-color: #2f85da;
+    color: white;
+    border: none;
+    padding: 8px;
+    cursor: pointer;
+}
+
+input[type="button"]:hover,
+input[type="submit"]:hover,
+input[type="reset"]:hover,
+button:hover {
+    background-color: #1c5fa3;
+}
+
+/* FIELD SPECIFIC */
+input[name="firstname"] {
+    border: 2px solid #2f85da;
+}
+
+/* REQUIRED */
+.required {
+    color: red;
+    font-weight: bold;
+}
+
+/* ERROR (HW3 REQUIRED) */
+.error {
+    color: red;
+    font-size: 12px;
+}
