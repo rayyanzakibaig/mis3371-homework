@@ -1,0 +1,293 @@
+/*
+Program name: style.css
+Author: Rayyan Zakibaig
+Date created: 02/27/2026
+Date last edited: 04/17/2026
+Version: 3.0
+Description: Stylesheet for PrimeCare Medical Center Patient Registration
+*/
+
+/* ================================================================
+   BASE
+   ================================================================ */
+   body {
+    background-color: #e6f2f7;
+    font-family: Arial, sans-serif;
+    font-size: 14px;
+    color: #333;
+    margin: 0;
+    padding: 0;
+}
+
+/* ================================================================
+   HEADER / FOOTER
+   ================================================================ */
+#header {
+    text-align: center;
+    background-color: #2f85da;
+    color: white;
+    padding: 15px;
+
+    position: fixed;
+    top: 0;
+    width: 100%;
+    z-index: 1000;
+}
+
+#header p {
+    margin: 4px 0 0 0;
+    font-size: 13px;
+}
+
+#footer {
+    background-color: #2f85da;
+    color: white;
+    text-align: center;
+    padding: 15px;
+
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+}
+
+/* ================================================================
+   HEADINGS
+   ================================================================ */
+h1 {
+    font-family: Georgia, serif;
+    color: white;
+    margin: 8px 0 4px 0;
+}
+
+h2 {
+    font-family: Georgia, serif;
+    color: #003366;
+    margin-bottom: 6px;
+}
+
+h3 {
+    color: #003366;
+}
+
+/* ================================================================
+   MAIN CONTENT
+   ================================================================ */
+#main {
+    padding: 15px 30px;
+
+    margin-top: 190px;
+    margin-bottom: 140px;
+}
+
+/* ================================================================
+   LINKS
+   ================================================================ */
+a {
+    color: #1a6dbd;
+    text-decoration: none;
+}
+
+a:visited {
+    color: #6699cc;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
+/* ================================================================
+   TABLE LAYOUT
+   ================================================================ */
+table {
+    margin: 0 auto;
+    border-collapse: separate;
+    border-spacing: 4px 2px;
+}
+
+td {
+    padding: 4px 6px;
+    vertical-align: top;
+}
+
+/* ================================================================
+   FORM ELEMENTS
+   ================================================================ */
+input[type="text"],
+input[type="email"],
+input[type="tel"],
+input[type="password"],
+input[type="date"],
+select,
+textarea {
+    padding: 5px 7px;
+    border: 1px solid #aac6e0;
+    border-radius: 4px;
+    font-size: 13px;
+    background-color: #f9fdff;
+    box-sizing: border-box;
+}
+
+input[type="text"]:focus,
+input[type="email"]:focus,
+input[type="tel"]:focus,
+input[type="password"]:focus,
+input[type="date"]:focus,
+select:focus,
+textarea:focus {
+    outline: 2px solid #2f85da;
+    background-color: #ffffff;
+}
+
+/* Input width helpers */
+.wide-input {
+    width: 320px;
+}
+
+.short-input {
+    width: 44px;
+}
+
+.zip-input {
+    width: 70px;
+}
+
+textarea {
+    resize: vertical;
+}
+
+/* ================================================================
+   BUTTONS
+   ================================================================ */
+input[type="button"],
+input[type="submit"],
+input[type="reset"],
+button {
+    background-color: #2f85da;
+    color: white;
+    border: none;
+    padding: 8px 14px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 13px;
+    margin: 3px;
+}
+
+input[type="button"]:hover,
+input[type="submit"]:hover,
+button:hover {
+    background-color: #1c5fa3;
+}
+
+input[type="reset"] {
+    background-color: #888;
+}
+
+input[type="reset"]:hover {
+    background-color: #666;
+}
+
+.btn-row {
+    text-align: center;
+    padding-top: 10px;
+}
+
+/* ================================================================
+   ERROR MESSAGES
+   Pre-reserve height so the form does not jump when errors appear/clear.
+   ================================================================ */
+.error {
+    color: #cc0000;
+    font-size: 12px;
+    min-height: 16px;  /* prevents layout jumping */
+    line-height: 16px;
+    font-style: italic;
+}
+
+/* ================================================================
+   REQUIRED ASTERISK
+   ================================================================ */
+.required {
+    color: #cc0000;
+    font-weight: bold;
+    margin-left: 2px;
+}
+
+/* ================================================================
+   INLINE HINT TEXT
+   ================================================================ */
+.hint {
+    color: #666;
+    font-size: 11px;
+    font-style: italic;
+    margin-left: 6px;
+}
+
+/* ================================================================
+   SLIDER
+   ================================================================ */
+input[type="range"] {
+    vertical-align: middle;
+    cursor: pointer;
+    accent-color: #2f85da;
+}
+
+.slider-val {
+    font-weight: bold;
+    color: #2f85da;
+    font-size: 15px;
+    min-width: 20px;
+    display: inline-block;
+    text-align: center;
+}
+
+/* ================================================================
+   CHECKBOXES / RADIO GROUP
+   ================================================================ */
+.checkbox-group label,
+td label {
+    margin-right: 12px;
+    white-space: nowrap;
+}
+
+.checkbox-group {
+    margin-top: 4px;
+}
+
+/* ================================================================
+   REVIEW / SUMMARY TABLE
+   ================================================================ */
+#reviewSection {
+    margin-top: 20px;
+    padding: 10px 20px;
+}
+
+#reviewTable {
+    border-collapse: collapse;
+    margin: 0;
+    font-size: 13px;
+}
+
+#reviewTable th,
+#reviewTable td {
+    border: 1px solid #aac6e0;
+    padding: 5px 10px;
+    text-align: left;
+}
+
+#reviewTable th {
+    background-color: #2f85da;
+    color: white;
+}
+
+#reviewTable tr:nth-child(even) {
+    background-color: #daeefa;
+}
+
+/* ================================================================
+   HR DIVIDER
+   ================================================================ */
+hr {
+    border: none;
+    border-top: 2px solid #2f85da;
+    margin: 0;
+}
