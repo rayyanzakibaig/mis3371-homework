@@ -332,9 +332,9 @@ function handleSubmit() {
 
 function handleValidate() {
     if (validateAll()) {
-        document.getElementById("submitBtn").style.display = "inline-block";
+        alert("All fields valid. Ready to submit.");
     } else {
-        document.getElementById("submitBtn").style.display = "none";
+        alert("Please fix errors before submitting.");
     }
-}   
+}
 }
