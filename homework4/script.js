@@ -212,7 +212,20 @@ function validateAll() {
    REVIEW
    ================================================================ */
 function reviewForm() {
-    alert("Review working");
+
+    let output = `
+    <table id="reviewTable">
+        <tr><th>Field</th><th>Value</th></tr>
+        <tr><td>First Name</td><td>${document.getElementById("firstname").value}</td></tr>
+        <tr><td>Last Name</td><td>${document.getElementById("lastname").value}</td></tr>
+        <tr><td>Email</td><td>${document.getElementById("email").value}</td></tr>
+        <tr><td>Phone</td><td>${document.getElementById("phone").value}</td></tr>
+        <tr><td>City</td><td>${document.getElementById("city").value}</td></tr>
+        <tr><td>State</td><td>${document.getElementById("state").value}</td></tr>
+    </table>
+    `;
+
+    document.getElementById("reviewSection").innerHTML = output;
 }
 
 /* ================================================================
